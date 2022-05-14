@@ -25,13 +25,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PokemonKind {
+	
+	// stream 사용하여 배열 -> Set 변경 답변
 	public static int solution(int[] nums) {
-
-		// 포켓몬 종류 set
-		HashSet<Integer> pokemonKind = (HashSet<Integer>) Arrays.stream(nums).boxed().collect(Collectors.toSet());
+		// 포켓몬 종류 int[] -> HashSet<Integer>
+		Set<Integer> pokemonKind = Arrays
+				.stream(nums).boxed()			// boxed() 원시타입 int -> Integer로 전환
+				.collect(Collectors.toSet());
 		return Math.min(nums.length / 2, pokemonKind.size());
 	}
 
+	// 최초 문제 풀이시 답변
 	public static int solution2(int[] nums) {
          // int[] nums -> HasSet
          HashSet<Integer> kind = new HashSet<>();
