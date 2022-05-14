@@ -2,6 +2,13 @@ package level1;
 
 import java.util.*;
 
+/*
+programmers
+level: 1
+title: 신고 결과 받기
+url: https://programmers.co.kr/learn/courses/30/lessons/92334?language=java
+*/
+
 public class ReportResult {
 	// 최초 풀이
 	public static int[] solution(String[] id_list, String[] report, int k) {

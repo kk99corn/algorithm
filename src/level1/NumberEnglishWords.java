@@ -2,6 +2,12 @@ package level1;
 
 import java.util.HashMap;
 
+/*
+programmers
+level: 1
+title: 숫자 문자열과 영단어
+url: https://programmers.co.kr/learn/courses/30/lessons/81301
+*/
 public class NumberEnglishWords {
 
 	public int solution(String s) {
