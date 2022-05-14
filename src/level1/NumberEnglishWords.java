@@ -20,8 +20,10 @@ public class NumberEnglishWords {
 
 		int answer = 0;
 		for(String numberStr: matchMap.keySet()) {
+			// 숫자 -> 문자 형변환: Integer.toString()
 			s = s.replace(numberStr, Integer.toString(matchMap.get(numberStr)));
 			try {
+				// 문자 -> 숫자 형변화: Integer.parseInt()
 				answer = Integer.parseInt(s);
 				break;
 			} catch(NumberFormatException e) {
