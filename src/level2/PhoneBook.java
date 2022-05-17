@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /*
 programmers
-level: 1
+level: 2
 title: 전화번호 목록
 url: https://programmers.co.kr/learn/courses/30/lessons/42577
 */
