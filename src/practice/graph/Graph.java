@@ -3,6 +3,8 @@ package practice.graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+
 /*
 1) 그래프의 모든 정점을 방문하는 것이 주요한 문제
 단순히 모든 정점을 방문하는 것이 중요한 문제의 경우 DFS, BFS 두 가지 방법 중 어느 것을 사용해도 상관없다
@@ -45,8 +47,8 @@ public class Graph {
 		graphList.get(x).add(y);
 	}
 
-	// 그래프 탐색 DFS(Depth First Search)
-	public void dfs(int x) {
+	// 그래프 탐색 DFS(Depth First Search) - 재귀
+	public void rdfs(int x) {
 		// 방문처리
 		visit[x] = true;
 		System.out.print(x + " ");
@@ -55,7 +57,27 @@ public class Graph {
 		for (int i = 0; i < graphList.get(x).size(); i++) {
 			int y = graphList.get(x).get(i);
 			if (!visit[y]) {
-				dfs(y);
+				rdfs(y);
+			}
+		}
+	}
+
+	// 그래프 탐색 DFS - stack
+	public void dfs(int v) {
+		Stack<Integer> s = new Stack<>();
+		// visit[v] = true;
+		s.push(v);
+
+		while (!s.isEmpty()) {
+			int x = s.pop();
+			if (visit[x]) continue;
+			visit[x] = true;
+			System.out.println(x + " ");
+			for (int i = 0; i <graphList.get(x).size(); i++) {
+				int y = graphList.get(x).get(i);
+				if (!visit[y] && y != 0) {
+					s.push(y);
+				}
 			}
 		}
 	}
@@ -90,8 +112,8 @@ public class Graph {
 		_graph.addEdgeUndirected(5, 2);
 
 		long startTime = System.currentTimeMillis();
-		//_graph.dfs(5);
-		_graph.bfs(1);
+		_graph.dfs(1);
+//		_graph.bfs(1);
 		long endTime = System.currentTimeMillis();
 		System.out.println((endTime - startTime) + "ms");
 	}
