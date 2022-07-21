@@ -53,9 +53,42 @@ public class Printer {
 
 	public static void main(String[] args) {
 		int[] priorities = {2, 1, 3, 2};
-		int location = 2;
+		int location = 1;
 		Printer printer = new Printer();
-		int solution1 = printer.solution(priorities, location);
+		int solution1 = printer.solution2(priorities, location);
 		System.out.println("solution1 = " + solution1);
+	}
+
+
+	public int solution2(int[] priorities, int location) {
+		Queue<HashMap<Integer, Integer>> q1 = new LinkedList<>();
+		ArrayList<Integer> list = new ArrayList<>();
+
+		for (int i=0; i<priorities.length; i++) {
+			HashMap<Integer, Integer> map = new HashMap<>();
+			map.put(i, priorities[i]);
+			q1.add(map);
+
+			list.add(priorities[i]);
+		}
+
+		list.sort(Collections.reverseOrder());
+
+		int idx = 0;
+		for (int i=0; i<list.size(); i++) {
+			for (int j=0; j <q1.size(); j++) {
+				if (q1.peek().containsValue(list.get(i))) {
+					idx++;
+					if (q1.poll().containsKey(location)) {
+						return idx;
+					}
+					break;
+				} else {
+					q1.add(q1.poll());
+				}
+			}
+		}
+
+		return 0;
 	}
 }

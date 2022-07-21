@@ -17,7 +17,7 @@ public class Network {
 	public int solution(int n, int[][] computers) {
 		ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
-			graph.add(new ArrayList<Integer>());
+			graph.add(new ArrayList<>());
 			computerList.add(i);
 		}
 
@@ -30,6 +30,9 @@ public class Network {
 				}
 			}
 		}
+		System.out.println("graph = " + graph);
+		System.out.println("computerList = " + computerList);
+
 		int answer = 0;
 		// 미방문한 컴퓨터 리스트가 없을 때 까지 반복
 		while (!computerList.isEmpty()) {
@@ -47,6 +50,7 @@ public class Network {
 		visit[v] = true;
 		// 최초 노드는 방문이 완료됐기 때문에, 미방문 리스트에서 제거
 		computerList.remove(Integer.valueOf(v));
+		System.out.println("computerList = " + computerList);
 
 		while (!q.isEmpty()) {
 			int x = q.poll();

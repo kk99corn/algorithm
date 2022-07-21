@@ -37,6 +37,8 @@ public class VisitLength {
 					if (x > min) x--;
 					break;
 			}
+
+
 			// 이동 위치
 			String next = Integer.toString(x) + y;
 			if (!current.equals(next)) {

@@ -1,12 +1,8 @@
-package level3;
+package practice.coding.ip;
 
-/*
-programmers
-level: 3
-title: 가장 긴 팰린드롬
-url: https://programmers.co.kr/learn/courses/30/lessons/12904
-*/
-public class LongestPalindrome {
+// 앞뒤를 뒤집어도 똑같은 문자열 팰린드롬
+// 문자열 s가 주어질때 s의 부분문자열중 가장 긴 팰린드롬의 길이를 return하는 함수 완성
+public class Test3 {
 	public int solution(String s) {
 		int wordLength = s.length();
 		char[] charArr = new char[wordLength];
@@ -36,9 +32,8 @@ public class LongestPalindrome {
 
 	public static void main(String[] args) {
 		String s = "abacde";
-		practice.coding.ip.Test3 test3 = new practice.coding.ip.Test3();
+		Test3 test3 = new Test3();
 		int solution = test3.solution(s);
 		System.out.println("solution = " + solution);
 	}
 }
-
