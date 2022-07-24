@@ -18,7 +18,6 @@ public class Sequence {
 
 		if (n < 100) {
 			answer = n;
-			bufferedWriter.write(answer + "\n");
 		} else {
 			answer = 99;
 			for (int i = 100; i <= n; i++) {
@@ -38,8 +37,8 @@ public class Sequence {
 				}
 				if (is) answer++;
 			}
-			bufferedWriter.write(answer + "\n");
 		}
+		bufferedWriter.write(answer + "\n");
 
 		bufferedWriter.close();
 	}
