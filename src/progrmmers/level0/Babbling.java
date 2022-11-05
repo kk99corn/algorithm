@@ -1,5 +1,9 @@
 package progrmmers.level0;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /*
 programmers
 level: 0
@@ -11,34 +15,19 @@ public class Babbling {
 	public int solution(String[] babbling) {
 		String[] ableWords = {"aya", "ye", "woo", "ma"};
 
-		int answer = 0;
-		for (String babblingWord : babbling) {
-			for (String word : ableWords) {
-				if (babblingWord.contains(word)) {
-					babblingWord = babblingWord.replaceFirst(word, "-");
-				}
-			}
-			if (babblingWord.replaceAll("-", "").equals("")) {
-				answer++;
-			}
-		}
-		return answer;
-
-//		AtomicInteger answer = new AtomicInteger();
-//
-//		Set<String> aaa = Arrays.stream(babbling)
-//				.filter(s -> {
-//					for (String word : ableWords) {
-//						if (s.contains(word)) {
-//							s = s.replaceFirst(word, "-");
-//						}
-//					}
-//					if (s.replaceAll("-", "").equals("")) {
-//						answer.getAndIncrement();
-//					}
-//					return false;
-//				}).collect(Collectors.toSet());
-//		return answer.get();
+		List<String> collect = Arrays.stream(babbling)
+				.map(s -> {
+					for (String word : ableWords) {
+						if (s.contains(word)) {
+							s = s.replaceFirst(word, "-");
+						}
+					}
+					System.out.println(s);
+					return s;
+				})
+				.filter(s -> s.replaceAll("-", "").equals(""))
+				.collect(Collectors.toList());
+		return collect.size();
 }
 
 	public static void main(String[] args) {
