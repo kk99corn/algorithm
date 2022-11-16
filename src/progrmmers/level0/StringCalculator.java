@@ -1,5 +1,7 @@
 package progrmmers.level0;
 
+import java.util.Arrays;
+
 /*
 programmers
 level: 0
@@ -25,10 +27,23 @@ public class StringCalculator {
 		return answer;
 	}
 
+	public int solution_stream(String my_string) {
+		return Arrays.stream(
+				my_string.replaceAll("- ", "-")
+						.replaceAll("[+] ", "")
+						.trim()
+						.split(" "))
+				.mapToInt(Integer::parseInt)
+				.sum();
+	}
+
 	public static void main(String[] args) {
 		String my_string = "3 + 4";
 		StringCalculator solution = new StringCalculator();
 		int solution1 = solution.solution(my_string);
 		System.out.println("result = " + solution1);
+
+		int solution2 = solution.solution_stream(my_string);
+		System.out.println("result = " + solution2);
 	}
 }
