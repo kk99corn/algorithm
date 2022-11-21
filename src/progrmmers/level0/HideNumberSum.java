@@ -1,5 +1,7 @@
 package progrmmers.level0;
 
+import java.util.Arrays;
+
 /*
 programmers
 level: 0
@@ -19,11 +21,20 @@ public class HideNumberSum {
 		return answer;
 	}
 
+	public int solution_stream(String my_string) {
+		return Arrays.stream(my_string.split("[a-zA-Z]"))
+				.filter(s -> !s.isEmpty())
+				.mapToInt(Integer::parseInt)
+				.sum();
+	}
+
 	public static void main(String[] args) {
 		String numbers = "aAb1B2cC34oOp";
 		HideNumberSum solution = new HideNumberSum();
-		long solution1 = solution.solution(numbers);
-
+		int solution1 = solution.solution(numbers);
 		System.out.println("result = " + solution1);
+
+		int solution2 = solution.solution_stream(numbers);
+		System.out.println("result = " + solution2);
 	}
 }
