@@ -2,6 +2,7 @@ package progrmmers.level0;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +28,23 @@ public class TreatmentOrder {
 		return answer;
 	}
 
+	public int[] solution_stream(int[] emergency) {
+		return Arrays.stream(emergency)
+				.map(i -> Arrays.stream(emergency)
+						.boxed()
+						.sorted(Comparator.reverseOrder())
+						.collect(Collectors.toList())
+						.indexOf(i) + 1)
+				.toArray();
+	}
+
 	public static void main(String[] args) {
 		int[] emergency = {3, 76, 24};
 		TreatmentOrder solution = new TreatmentOrder();
 		int[] solution1 = solution.solution(emergency);
 		System.out.println("result = " + Arrays.toString(solution1));
+
+		int[] solution2 = solution.solution_stream(emergency);
+		System.out.println("result = " + Arrays.toString(solution2));
 	}
 }
