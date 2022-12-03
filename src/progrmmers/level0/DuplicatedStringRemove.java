@@ -3,6 +3,7 @@ package progrmmers.level0;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /*
 programmers
@@ -21,10 +22,20 @@ public class DuplicatedStringRemove {
 		return answer;
 	}
 
+	public String solution_stream(String my_string) {
+		return my_string.chars()
+				.mapToObj(Character::toString)
+				.distinct()
+				.collect(Collectors.joining());
+	}
+
 	public static void main(String[] args) {
 		String my_string = "people";
 		DuplicatedStringRemove solution = new DuplicatedStringRemove();
 		String solution1 = solution.solution(my_string);
 		System.out.println("result = " + solution1);
+
+		String solution2 = solution.solution_stream(my_string);
+		System.out.println("result = " + solution2);
 	}
 }
