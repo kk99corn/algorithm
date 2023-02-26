@@ -1,6 +1,8 @@
 package progrmmers.level1;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /*
 programmers
@@ -52,6 +54,23 @@ public class ReportResult {
 		return answer;
 	}
 
+	public static int[] solution_stream(String[] id_list, String[] report, int k) {
+		Set<String> reportSet = Arrays.stream(report).collect(Collectors.toSet());
+		Map<String, List<String>> reportedMap = reportSet.stream()
+				.map(reportString -> reportString.split(" "))
+				.collect(Collectors.groupingBy(strings -> strings[1],
+						Collectors.mapping(strings -> strings[0], Collectors.toList())));
+
+		Map<String, Integer> mailCount = reportedMap.entrySet().stream()
+				.filter(entry -> entry.getValue().size() >= k)
+				.flatMap(entry -> entry.getValue().stream())
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(x -> 1)));
+
+		return Arrays.stream(id_list)
+				.mapToInt(id -> mailCount.getOrDefault(id, 0))
+				.toArray();
+	}
+
 	public static void main(String[] args) {
 		String[] id_list = {"muzi", "frodo", "apeach", "neo"};
 		String[] report = {"muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"};
@@ -59,5 +78,8 @@ public class ReportResult {
 
 		int[] result = solution(id_list, report, k);
 		System.out.println("result = " + Arrays.toString(result));
+
+		int[] result2 = solution_stream(id_list, report, k);
+		System.out.println("result2 = " + Arrays.toString(result2));
 	}
 }
