@@ -1,5 +1,7 @@
 package progrmmers.level1;
 
+import java.util.Arrays;
+
 /*
 programmers
 level: 1
@@ -69,11 +71,46 @@ public class NewIdRecommend {
 		return new_id;
 	}
 
+	public String solution_stream(String new_id) {
+		String result = Arrays.stream(new_id.toLowerCase().split(""))
+				.filter(s -> s.matches("[a-z0-9._-]"))
+				.reduce("", (acc, s) -> {
+					if (acc.endsWith(".") && s.equals(".")) {
+						return acc;
+					} else {
+						return acc + s;
+					}
+				});
+
+		result = result.replaceAll("^\\.|\\.$", "");
+
+		if (result.isEmpty()) {
+			result = "a";
+		}
+
+		if (result.length() >= 16) {
+			result = result.substring(0, 15);
+			result = result.replaceAll("\\.$", "");
+		}
+
+		if (result.length() <= 2) {
+			String last = String.valueOf(result.charAt(result.length() - 1));
+			while (result.length() < 3) {
+				result += last;
+			}
+		}
+
+		return result;
+	}
+
 	public static void main(String[] args) {
 
 		String s = "...!@BaT#*..y.abcdefghijklm";
 		NewIdRecommend newIdRecommend = new NewIdRecommend();
 		String solution = newIdRecommend.solution(s);
 		System.out.println("solution = " + solution);
+
+		String solution2 = newIdRecommend.solution_stream(s);
+		System.out.println("solution2 = " + solution2);
 	}
 }
