@@ -1,6 +1,7 @@
 package progrmmers.level2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /*
 programmers
@@ -105,10 +106,21 @@ public class BiggestNumber {
 		return answer;
 	}
 
+	public String solution_Stream(int[] numbers) {
+		String result = Arrays.stream(numbers)
+				.mapToObj(String::valueOf)
+				.sorted((a, b) -> (b + a).compareTo(a + b))
+				.collect(Collectors.joining());
+		return result.charAt(0) == '0' ? "0" : result;
+	}
+
 	public static void main(String[] args) {
 		int[] numbers = {3, 30, 34, 5, 9};
 		BiggestNumber biggestNumber = new BiggestNumber();
 		String solution = biggestNumber.solution(numbers);
 		System.out.println("solution = " + solution);
+
+		String solution2 = biggestNumber.solution_Stream(numbers);
+		System.out.println("solution2 = " + solution2);
 	}
 }
