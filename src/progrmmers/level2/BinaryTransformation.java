@@ -25,9 +25,29 @@ public class BinaryTransformation {
 		}
 	}
 
+	public int[] solution_stream(String s) {
+		int[] answer = new int[2];
+
+		while (true) {
+			answer[0]++;
+			long zeroCount = s.chars().filter(c -> c == '0').count();
+			s = Long.toBinaryString(s.length() - zeroCount);
+
+			if (s.length() == 1) {
+				answer[1] += zeroCount;
+				return answer;
+			} else {
+				answer[1] += zeroCount;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		BinaryTransformation binaryTransformation = new BinaryTransformation();
 		int[] solution = binaryTransformation.solution("110010101001");
 		System.out.println("solution = " + Arrays.toString(solution));
+
+		int[] solution2 = binaryTransformation.solution_stream("110010101001");
+		System.out.println("solution2 = " + Arrays.toString(solution2));
 	}
 }
