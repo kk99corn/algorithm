@@ -1,5 +1,7 @@
 package progrmmers.level1;
 
+import java.util.stream.IntStream;
+
 /*
 programmers
 level: 1
@@ -18,6 +20,12 @@ public class Cola {
 		return answer;
 	}
 
+	public int solution_stream(int a, int b, int n) {
+		return IntStream.iterate(n, num -> num >= a, num -> num - a + b)
+				.map(num -> b)
+				.sum();
+	}
+
 	public static void main(String[] args) {
 		int a = 2;
 		int b = 1;
@@ -25,5 +33,8 @@ public class Cola {
 		Cola solution = new Cola();
 		int solution1 = solution.solution(a, b, n);
 		System.out.println("result = " + (solution1));
+
+		int solution2 = solution.solution_stream(a, b, n);
+		System.out.println("result = " + (solution2));
 	}
 }
