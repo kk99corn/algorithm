@@ -1,44 +1,44 @@
 package progrmmers.level2;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /*
 programmers
 level: 2
-title: n^2 배열 자르기
-url: https://programmers.co.kr/learn/courses/30/lessons/87390
+title: 뒤에 있는 큰 수 찾기
+url: https://programmers.co.kr/learn/courses/30/lessons/154539
 */
 public class BackSearch {
-	// int[] numbers = {9, 1, 5, 3, 6, 2, 1};
-	//				   -1, 5, 6, 6, -1, -1
-	public int[] solution(int[] numbers) {
-		int[] answer = new int[numbers.length];
-		answer[numbers.length - 1] = -1;
+
+	public int[] solutionStream(int[] numbers) {
+		int size = numbers.length;
+		int[] answer = new int[size];
+		Arrays.fill(answer, -1);
+
+		Stack<Integer> stack = new Stack<>();
+		IntStream.range(0, size)
+				.forEach(i -> {
+					while (!stack.isEmpty() && numbers[stack.peek()] < numbers[i]) {
+						answer[stack.pop()] = numbers[i];
+					}
+					stack.push(i);
+				});
 
 		return answer;
 	}
 
-	public int[] solution2(int[] numbers) {
-		int[] answer = new int[numbers.length];
+	public int[] solution(int[] numbers) {
+		int size = numbers.length;
+		int[] answer = new int[size];
 		Arrays.fill(answer, -1);
 
-		Set<Integer> skip = new HashSet<>();
-
-		for (int i = 0; i < numbers.length - 1; i++) {
-			int x = numbers[i];
-
-			if (skip.contains(x)) {
-				continue;
+		Stack<Integer> stack = new Stack<>();
+		for (int i = 0; i < size; i++) {
+			while (!stack.isEmpty() && numbers[stack.peek()] < numbers[i]) {
+				answer[stack.pop()] = numbers[i];
 			}
-
-			skip.add(x);
-			for (int j = i + 1; j < numbers.length; j++) {
-				if (x < numbers[j]) {
-					skip.remove(x);
-					answer[i] = numbers[j];
-					break;
-				}
-			}
+			stack.push(i);
 		}
 
 		return answer;
@@ -49,5 +49,8 @@ public class BackSearch {
 		BackSearch arrayDivide = new BackSearch();
 		int[] solution = arrayDivide.solution(numbers);
 		System.out.println("solution = " + Arrays.toString(solution));
+
+		int[] solution2 = arrayDivide.solutionStream(numbers);
+		System.out.println("solution = " + Arrays.toString(solution2));
 	}
 }
