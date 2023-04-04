@@ -12,6 +12,19 @@ url: https://programmers.co.kr/learn/courses/30/lessons/176963
 */
 public class Yearning {
 
+	public int[] solutionStream(String[] name, int[] yearning, String[][] photo) {
+		Map<String, Integer> yearningMap = new HashMap<>();
+		for (int i = 0; i < name.length; i++) {
+			yearningMap.put(name[i], yearning[i]);
+		}
+
+		return Arrays.stream(photo)
+				.mapToInt(names -> Arrays.stream(names)
+						.mapToInt(n -> yearningMap.getOrDefault(n, 0))
+						.sum())
+				.toArray();
+	}
+
 	public int[] solution(String[] name, int[] yearning, String[][] photo) {
 		Map<String, Integer> yearningMap = new HashMap<>();
 		for (int i = 0; i < name.length; i++) {
@@ -35,5 +48,8 @@ public class Yearning {
 		Yearning arrayDivide = new Yearning();
 		int[] solution = arrayDivide.solution(name, yearning, photo);
 		System.out.println("solution = " + Arrays.toString(solution));
+
+		int[] solution2 = arrayDivide.solutionStream(name, yearning, photo);
+		System.out.println("solution = " + Arrays.toString(solution2));
 	}
 }
