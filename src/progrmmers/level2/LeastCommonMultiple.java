@@ -1,5 +1,7 @@
 package progrmmers.level2;
 
+import java.util.Arrays;
+
 /*
 programmers
 level: 2
@@ -7,6 +9,14 @@ title: N개의 최소공배수
 url: https://programmers.co.kr/learn/courses/30/lessons/12953
 */
 public class LeastCommonMultiple {
+
+	public int solutionStream(int[] arr) {
+		if (arr.length == 1) return arr[0];
+
+		return Arrays.stream(arr)
+				.reduce(1, (acc, num) -> acc * num / getCommonDenominator(acc, num));
+	}
+
 	public int solution(int[] arr) {
 		if (arr.length == 1) return arr[0];
 
@@ -29,5 +39,8 @@ public class LeastCommonMultiple {
 		LeastCommonMultiple leastCommonMultiple = new LeastCommonMultiple();
 		int solution = leastCommonMultiple.solution(arr);
 		System.out.println("solution = " + solution);
+
+		int solution2 = leastCommonMultiple.solutionStream(arr);
+		System.out.println("solution = " + solution2);
 	}
 }
