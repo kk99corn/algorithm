@@ -3,6 +3,8 @@ package progrmmers.level2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
 programmers
@@ -11,6 +13,21 @@ title: 줄 서는 방법
 url: https://programmers.co.kr/learn/courses/30/lessons/12936
 */
 public class LineMethod {
+
+	public int[] solutionStream(int n, long k) {
+		List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+		int[] answer = new int[n];
+		k--;
+		long num = IntStream.rangeClosed(1, n).mapToLong(Long::valueOf).reduce(1, (a, b) -> a * b);
+		for (int i = 0; i < n; i++) {
+			num /= (n - i);
+			int index = (int) (k / num);
+			answer[i] = list.remove(index);
+			k %= num;
+		}
+		return answer;
+	}
+
 	public int[] solution(int n, long k) {
 		int[] answer = new int[n];
 		List<Integer> list = new ArrayList<>();
@@ -37,5 +54,8 @@ public class LineMethod {
 		LineMethod lineMethod = new LineMethod();
 		int[] solution = lineMethod.solution(n, k);
 		System.out.println("solution = " + Arrays.toString(solution));
+
+		int[] solution2 = lineMethod.solutionStream(n, k);
+		System.out.println("solution = " + Arrays.toString(solution2));
 	}
 }
