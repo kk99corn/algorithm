@@ -9,6 +9,29 @@ title: 2개 이하로 다른 비트
 url: https://programmers.co.kr/learn/courses/30/lessons/77885
 */
 public class LongToBit {
+
+	public long[] solutionStream(long[] numbers) {
+		return Arrays.stream(numbers)
+				.map(number -> {
+					if (number % 2 == 0) {
+						return number + 1;
+					} else {
+						StringBuilder temp = new StringBuilder();
+						String binaryString = Long.toBinaryString(number);
+						if (!binaryString.contains("0")) {
+							temp.append("10");
+							temp.append(binaryString.substring(1).replace("0", "1"));
+						} else {
+							int lastIndex = binaryString.lastIndexOf("0");
+							int firstOneIndex = binaryString.indexOf("1", lastIndex);
+							temp.append(binaryString, 0, lastIndex).append("1").append("0").append(binaryString.substring(firstOneIndex + 1));
+						}
+						return Long.parseLong(temp.toString(), 2);
+					}
+				})
+				.toArray();
+	}
+
 	public long[] solution(long[] numbers) {
 		long[] answer = new long[numbers.length];
 		for (int i = 0; i < numbers.length; i++) {
@@ -48,5 +71,8 @@ public class LongToBit {
 		LongToBit longToBit = new LongToBit();
 		long[] solution = longToBit.solution(numbers);
 		System.out.println("solution = " + Arrays.toString(solution));
+
+		long[] solution2 = longToBit.solutionStream(numbers);
+		System.out.println("solution = " + Arrays.toString(solution2));
 	}
 }
