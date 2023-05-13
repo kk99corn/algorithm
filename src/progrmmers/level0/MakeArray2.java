@@ -3,6 +3,8 @@ package progrmmers.level0;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
 programmers
@@ -11,6 +13,15 @@ title: 배열 만들기 2
 url: https://school.programmers.co.kr/learn/courses/30/lessons/181921
 */
 public class MakeArray2 {
+
+	public int[] solutionStream(int l, int r) {
+		List<Integer> list = IntStream.rangeClosed(l, r)
+				.filter(i -> Integer.toString(i).matches("[05]+"))
+				.boxed()
+				.collect(Collectors.toList());
+
+		return list.isEmpty() ? new int[]{-1} : list.stream().mapToInt(i -> i).toArray();
+	}
 
 	public int[] solution(int l, int r) {
 		List<Integer> list = new ArrayList<>();
@@ -35,5 +46,8 @@ public class MakeArray2 {
 		MakeArray2 solution = new MakeArray2();
 		int[] solution1 = solution.solution(l, r);
 		System.out.println("result = " + Arrays.toString(solution1));
+
+		int[] solution2 = solution.solutionStream(l, r);
+		System.out.println("result = " + Arrays.toString(solution2));
 	}
 }
