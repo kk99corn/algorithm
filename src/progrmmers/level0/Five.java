@@ -23,7 +23,7 @@ public class Five {
 		Five solution = new Five();
 
 		String[] names = {"nami", "ahri", "jayce", "garen", "ivern", "vex", "jinx"};
-		String[] solution1 = solution.solution(names;
+		String[] solution1 = solution.solution(names);
 		System.out.println("result = " + Arrays.toString(solution1));
 	}
 }
