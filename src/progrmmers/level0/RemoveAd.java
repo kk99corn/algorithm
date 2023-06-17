@@ -12,6 +12,12 @@ url: https://school.programmers.co.kr/learn/courses/30/lessons/181870
 */
 public class RemoveAd {
 
+	public String[] solutionStream(String[] strArr) {
+		return Arrays.stream(strArr)
+				.filter(s -> !s.contains("ad"))
+				.toArray(String[]::new);
+	}
+
 	public String[] solution(String[] strArr) {
 		List<String> list = new ArrayList<>();
 		for (String s : strArr) {
@@ -26,5 +32,8 @@ public class RemoveAd {
 		String[] strArr = {"and", "notad", "abcd"};
 		String[] solution1 = solution.solution(strArr);
 		System.out.println("result = " + Arrays.toString(solution1));
+
+		String[] solution2 = solution.solutionStream(strArr);
+		System.out.println("result = " + Arrays.toString(solution2));
 	}
 }
