@@ -1,5 +1,7 @@
 package progrmmers.level0;
 
+import java.util.stream.Collectors;
+
 /*
 programmers
 level: 0
@@ -7,6 +9,12 @@ title: l로 만들기
 url: https://school.programmers.co.kr/learn/courses/30/lessons/181834
 */
 public class MakeL {
+
+	public String solutionStream(String myString) {
+		return myString.chars()
+				.mapToObj(ch -> ch <= 'l' ? "l" : String.valueOf((char) ch))
+				.collect(Collectors.joining());
+	}
 
 	public String solution(String myString) {
 		String answer = "";
@@ -26,5 +34,8 @@ public class MakeL {
 		String myString = "abcdevwxyz";
 		String solution1 = solution.solution(myString);
 		System.out.println("result = " + (solution1));
+
+		String solution2 = solution.solutionStream(myString);
+		System.out.println("result = " + (solution2));
 	}
 }
