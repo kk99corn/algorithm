@@ -12,6 +12,15 @@ url: https://school.programmers.co.kr/learn/courses/30/lessons/181844
 */
 public class RemoveArray {
 
+	public int[] solutionStream(int[] arr, int[] delete_list) {
+		ArrayList<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
+		ArrayList<Integer> deleteList = Arrays.stream(delete_list).boxed().collect(Collectors.toCollection(ArrayList::new));
+
+		list.removeIf(deleteList::contains);
+
+		return list.stream().mapToInt(Integer::intValue).toArray();
+	}
+
 	public int[] solution(int[] arr, int[] delete_list) {
 		ArrayList<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
 		ArrayList<Integer> deleteList = Arrays.stream(delete_list).boxed().collect(Collectors.toCollection(ArrayList::new));
@@ -35,5 +44,8 @@ public class RemoveArray {
 		int[] delete_list = {94, 777, 104, 1000, 1, 12};
 		int[] solution1 = solution.solution(arr, delete_list);
 		System.out.println("result = " + Arrays.toString(solution1));
+
+		int[] solution2 = solution.solutionStream(arr, delete_list);
+		System.out.println("result = " + Arrays.toString(solution2));
 	}
 }
