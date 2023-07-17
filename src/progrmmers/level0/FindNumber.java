@@ -1,5 +1,7 @@
 package progrmmers.level0;
 
+import java.util.Arrays;
+
 /*
 programmers
 level: 0
@@ -7,6 +9,11 @@ title: 정수 찾기
 url: https://school.programmers.co.kr/learn/courses/30/lessons/181840
 */
 public class FindNumber {
+
+	public int solutionStream(int[] num_list, int n) {
+		return Arrays.stream(num_list)
+				.anyMatch(num -> num == n) ? 1 : 0;
+	}
 
 	public int solution(int[] num_list, int n) {
 		int answer = 0;
@@ -26,5 +33,8 @@ public class FindNumber {
 		int n = 3;
 		int solution1 = solution.solution(num_list, n);
 		System.out.println("result = " + (solution1));
+
+		int solution2 = solution.solutionStream(num_list, n);
+		System.out.println("result = " + (solution2));
 	}
 }
